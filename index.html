@@ -1,0 +1,136 @@
+<!-- 登录页面 -->
+<section id="login" class="section">
+    <h2>用户登录</h2>
+    <form id="login-form">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">登录</button>
+    </form>
+    <p id="login-message"></p>
+</section>
+
+<!-- 注册页面 -->
+<section id="register" class="section">
+    <h2>用户注册</h2>
+    <form id="register-form">
+        <label for="username">用户名:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">密码:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="email">邮箱:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">注册</button>
+    </form>
+    <p id="register-message"></p>
+</section>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naprol梅</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+               <li><a href="#home">首页</a></li>
+               <li><a href="#about">关于我</a></li>
+               <li><a href="#portfolio">作品集</a></li>
+               <li><a href="#contact">联系我</a></li>
+               <li><a href="#login">登录</a></li>
+               <li><a href="#register">注册</a></li>
+         </ul>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home" class="section">
+        <h1>欢迎来到我的个人网站</h1>
+        <p>我是[梅雨辰]，一名[初中生]。</p>
+        <div class="social-links">
+            <a href="https://github.com/naprol349" target="_blank">GitHub</a>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="section">
+        <h2>关于我</h2>
+        <p>我是一名[你的职业]，拥有[你的经验]的经验。我擅长[你的技能]，并且热爱[你的兴趣]。</p>
+        <h3>技能</h3>
+        <ul>
+            <li>HTML/CSS</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+        </ul>
+    </section>
+
+    <!-- 我的东西 -->
+    <section id="portfolio" class="section">
+        <h2>作品集</h2>
+        <div class="projects">
+            <div class="project">
+                <h3>项目1</h3>
+                <p>这是一个关于[项目描述]的项目。</p>
+                <a href="https://github.com/你的用户名/项目1" target="_blank">查看项目</a>
+            </div>
+            <div class="project">
+                <h3>项目2</h3>
+                <p>这是一个关于[项目描述]的项目。</p>
+                <a href="https://github.com/你的用户名/项目2" target="_blank">查看项目</a>
+            </div>
+        </div>
+    </section>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳转到我的东西</title>
+</head>
+<body>
+    <h1>跳转到我的东西</h1>
+    <p>跳转到我的东西：</p>
+    <a href="https://wwdc.lanzouo.com/b00q02p7zc" target="_blank">跳转到我的东西</a>
+</body>
+    <!-- 联系我 -->
+    <section id="contact" class="section">
+        <h2>联系我</h2>
+        <form id="contact-form">
+            <label for="name">姓名:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">消息:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">发送</button>
+        </form>
+        <p id="response-message"></p>
+    </section>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // 阻止表单默认提交行为
+
+            const formData = new FormData(this); // 获取表单数据
+            const data = Object.fromEntries(formData.entries()); // 转换为对象
+
+            // 发送数据到后端
+            fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(result => {
+                    document.getElementById('response-message').textContent = result.message;
+                })
+                .catch(error => {
+                    document.getElementById('response-message').textContent = '发送失败，请稍后重试。';
+                });
+        });
+    </script>
+</body>
+</html>
